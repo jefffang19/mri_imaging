@@ -8,6 +8,9 @@ BW = imdilate(BW,se);
 BW = imdilate(BW,se);
 BW = imdilate(BW,se);
 BW = imdilate(BW,se);
+BW = imerode(BW,se);
+BW = imerode(BW,se);
+BW = imerode(BW,se);
 
 figure
 subplot(1,2,1)
@@ -21,7 +24,7 @@ signal = mean(abs(X) .* BW, 'all');
 noise = std(abs(X) .* (1 - BW),0, 'all');
 
 % origin image
-signal/noise
+fprintf("origin image %f\n", signal/noise);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 % low pass filter
@@ -35,8 +38,8 @@ X = ifft2(k_space);
 signal = mean(abs(X) .* BW, 'all');
 noise = std(abs(X) .* (1 - BW),0, 'all');
 
-% origin image
-signal/noise
+% low pass filter
+fprintf("low pass filter %f\n", signal/noise);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 Hs = hamming(224);
@@ -51,5 +54,5 @@ X = ifft2(k_space);
 signal = mean(abs(X) .* BW, 'all');
 noise = std(abs(X) .* (1 - BW),0, 'all');
 
-% origin image
-signal/noise
+% hamming
+fprintf("hamming %f\n", signal/noise);
